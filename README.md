@@ -1,2 +1,2 @@
-# Phone-Book-API
+# Phonebook-Service
 A RESTful Web API for managing a phone book. Allows users to add, retrieve, update, and delete contacts.
