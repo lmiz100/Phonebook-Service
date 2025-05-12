@@ -1,0 +1,35 @@
+services:
+  app:
+    image: 'phonebook-service:latest'
+    build:
+      context: .
+    container_name: phonebook-service
+    restart: unless-stopped
+    ports:
+      - '8000:8080'
+    depends_on:
+      - db
+    environment:
+      PG_URL: "r2dbc:postgresql://db:5432/phonebook_db"
+      PG_USERNAME: "postgres"
+      PG_PASSWORD: "postgres"
+      logging_level_root: "DEBUG"
+      spring_profiles_active: "default, seed"
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 3G
+
+  db:
+    image: 'postgres:15.8-bullseye'
+    container_name: db
+    environment:
+      POSTGRES_DB: "phonebook_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - test_pgdata:/var/lib/postgresql/data
+
+volumes:
+  test_pgdata:
