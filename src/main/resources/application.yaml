@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: default
+  r2dbc:
+    url: ${PG_URL:r2dbc:postgresql://localhost:5432/phonebook_db}
+    username: ${PG_USERNAME:postgres}
+    password: ${PG_PASSWORD:test}
+  sql:
+    init:
+      mode: always
+logging:
+  level:
+    root: INFO
