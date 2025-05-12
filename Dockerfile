@@ -3,8 +3,6 @@ FROM gradle:8.5-jdk21 AS builder
 
 WORKDIR /app
 
-#COPY build.gradle settings.gradle gradle.properties ./
-COPY gradle ./gradle
 RUN gradle --no-daemon build -x test || return 0
 
 
